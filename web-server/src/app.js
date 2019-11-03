@@ -42,14 +42,13 @@ app.get('/weather', (req, res) => {
             if (error){
                 res.send(error)
             } else {
-                forecast(latitude, longitude, (error, {temperature, precipProbability} = {}) => {
+                forecast(latitude, longitude, (error, currentForecast) => {
                     if (error) {
                         res.send(error)
                     } else {
                         res.send({
                             location,
-                            temperature,
-                            precipProbability
+                            currentForecast
                         })
                     }
                 })
