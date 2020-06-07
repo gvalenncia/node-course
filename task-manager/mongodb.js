@@ -56,4 +56,23 @@ mongodb.MongoClient.connect(connectionUrl, { useNewUrlParser: true}, (error, cli
             }
             console.log(result)
         })
+    
+    db.collection('tasks')
+    .updateMany({ completed: false }, {
+        $set: {
+            completed: true
+        }
+    }).then((resolve) => {
+        console.log(resolve.matchedCount)
+    }).catch((reject) => {
+        console.error(reject)
+    })
+
+    db.collection('tasks')
+    .deleteOne({_id:new mongodb.ObjectID('5edbfaca65f3df1f480fffb0')})
+    .then((resolve)=>{
+        console.log('deleted')
+    }).catch((reject) => {
+        console.log("there was a problem to delete task", reject)
+    })
 })
